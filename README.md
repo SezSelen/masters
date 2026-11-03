@@ -14,12 +14,6 @@ Almanya'daki güçlü CS ve AI master programlarının deadline'larını, başvu
 - Belge kontrol listesi
 - Durum/notlar tarayıcıda saklanır; "Yedeği indir/yükle" ile cihazlar arasında taşınır
 
-## GitHub Pages'te yayınlama
-
-1. GitHub'da yeni bir repo aç (ör. `almanya-master-takip`). Notların tarayıcında kaldığı için repo public olabilir; ama veriyi kişisel tutmak istersen private repo + GitHub Pages için Pro hesap gerekir.
-2. Bu klasördeki `index.html`, `data.js`, `README.md` ve `.nojekyll` dosyalarını yükle (Add file → Upload files).
-3. **Settings → Pages → Build and deployment → Source: Deploy from a branch**, branch: `main`, klasör: `/ (root)` → Save.
-4. Birkaç dakika sonra site `https://<kullanıcı-adın>.github.io/almanya-master-takip/` adresinde yayında olur.
 
 ## Veriyi güncelleme
 
