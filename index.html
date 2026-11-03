@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Almanya Master Takip</title>
+<meta name="description" content="Almanya CS/AI master programları — deadline, başvuru süreci ve iş imkânı takibi (WS 2027/28)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f5f1; --panel:#ffffff; --ink:#1c1b19; --muted:#6b6862; --line:#e4e1da;
+  --accent:#b8441f; --accent-soft:#f6e3db; --ok:#2f7d4f; --ok-soft:#dff0e5;
+  --warn:#a86b00; --warn-soft:#fbefd4; --bad:#b3261e; --bad-soft:#f9dedc;
+  --bar:#2d5b8a; --bar-bg:#e6ecf2; --chip:#efede7;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#151513; --panel:#1f1e1b; --ink:#ece9e2; --muted:#a19d95; --line:#33312d;
+    --accent:#e57a52; --accent-soft:#3b2419; --ok:#6fcf97; --ok-soft:#1c3326;
+    --warn:#f0b54a; --warn-soft:#3a2e15; --bad:#f28b82; --bad-soft:#3d1e1c;
+    --bar:#7fb0e0; --bar-bg:#2a333d; --chip:#2b2a26;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151513; --panel:#1f1e1b; --ink:#ece9e2; --muted:#a19d95; --line:#33312d;
+  --accent:#e57a52; --accent-soft:#3b2419; --ok:#6fcf97; --ok-soft:#1c3326;
+  --warn:#f0b54a; --warn-soft:#3a2e15; --bad:#f28b82; --bad-soft:#3d1e1c;
+  --bar:#7fb0e0; --bar-bg:#2a333d; --chip:#2b2a26;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1280px;margin:0 auto;padding:28px 16px 64px}
+header{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;margin-bottom:24px}
+h1{font-size:28px;margin:0 0 4px;letter-spacing:-.02em}
+h2{font-size:18px;margin:0 0 12px}
+.sub{color:var(--muted);margin:0}
+.mono{font-family:"JetBrains Mono",monospace}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:7px 12px;border-radius:8px;cursor:pointer;font:inherit;font-size:13px}
+.btn:hover{border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.stat{font-size:30px;font-weight:700;letter-spacing:-.02em}
+.timeline{list-style:none;margin:0;padding:0;max-height:260px;overflow:auto}
+.timeline li{display:flex;gap:10px;align-items:baseline;padding:6px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.timeline li:last-child{border:0}
+.days{min-width:62px;font-weight:600;font-family:"JetBrains Mono",monospace;font-size:12.5px}
+.urgent{color:var(--bad)} .soon{color:var(--warn)} .later{color:var(--muted)}
+.weights label{display:grid;grid-template-columns:120px 1fr 28px;gap:8px;align-items:center;font-size:13px;margin:6px 0}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 12px}
+select,input[type=search]{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 10px;font:inherit;font-size:13px}
+.tablewrap{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:1180px;font-size:13.5px}
+th,td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{position:sticky;top:0;background:var(--panel);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);cursor:pointer;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.uni{font-weight:600}
+.prog{color:var(--muted);font-size:12.5px}
+.chip{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--chip);font-size:11.5px;margin:2px 4px 2px 0;white-space:nowrap}
+.chip.A{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.dl{font-weight:600;white-space:nowrap}
+.passed{text-decoration:line-through;color:var(--muted)}
+.score{display:flex;align-items:center;gap:8px;min-width:150px}
+.bar{flex:1;height:8px;background:var(--bar-bg);border-radius:4px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--bar)}
+.subscores{font-size:11.5px;color:var(--muted);margin-top:4px;font-family:"JetBrains Mono",monospace}
+details summary{cursor:pointer;color:var(--accent);font-size:12.5px}
+details p{margin:6px 0 0;font-size:12.5px;color:var(--muted);max-width:340px}
+.status{font-size:12.5px;padding:5px 6px}
+.st-gonderildi{background:var(--ok-soft)} .st-kabul{background:var(--ok-soft);color:var(--ok);font-weight:600}
+.st-ret{background:var(--bad-soft)} .st-hazirlaniyor{background:var(--warn-soft)}
+textarea{width:100%;min-width:160px;min-height:52px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px;font:inherit;font-size:12.5px;resize:vertical}
+.checklist label{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;padding:4px 0}
+.info p{margin:0 0 10px;font-size:13.5px}
+.info ul{margin:0 0 8px;padding-left:18px;font-size:13.5px}
+footer{color:var(--muted);font-size:12.5px;margin-top:28px}
+.toggle{display:flex;gap:8px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Almanya CS / AI Master Takibi</h1>
+      <p class="sub">Hedef: Kış dönemi 2027/28 (Ekim 2027 başlangıç) · Tarihler AB dışı adaylar içindir · Veri son kontrol: 3 Kasım 2026</p>
+    </div>
+    <div class="toggle">
+      <button class="btn" id="exportBtn" title="Durum ve notlarını JSON olarak indir">Yedeği indir</button>
+      <button class="btn" id="importBtn">Yedekten yükle</button>
+      <input type="file" id="importFile" accept="application/json" hidden>
+      <button class="btn" id="themeBtn">Tema</button>
+    </div>
+  </header>
+
+  <section class="grid">
+    <div class="card">
+      <h2>Sıradaki deadline</h2>
+      <div class="stat" id="nextDays">—</div>
+      <p class="sub" id="nextLabel"></p>
+    </div>
+    <div class="card">
+      <h2>Yaklaşan tarihler</h2>
+      <ul class="timeline" id="timeline"></ul>
+    </div>
+    <div class="card weights">
+      <h2>İş imkânı ağırlıkları</h2>
+      <label>Sektör yoğunluğu <input type="range" min="0" max="5" value="3" data-w="hub"><span class="mono">3</span></label>
+      <label>Maaş seviyesi <input type="range" min="0" max="5" value="3" data-w="maas"><span class="mono">3</span></label>
+      <label>İngilizce ile iş <input type="range" min="0" max="5" value="2" data-w="ingilizce"><span class="mono">2</span></label>
+      <label>Araştırma / PhD <input type="range" min="0" max="5" value="2" data-w="arastirma"><span class="mono">2</span></label>
+      <p class="sub" style="font-size:12px;margin-top:6px">"İş skoru" sütunu bu ağırlıklarla yeniden hesaplanır.</p>
+    </div>
+  </section>
+
+  <div class="controls">
+    <input type="search" id="q" placeholder="Üniversite, program, şehir ara…">
+    <select id="fCity"><option value="">Tüm şehirler</option></select>
+    <select id="fFee">
+      <option value="">Tüm ücretler</option>
+      <option value="0">Harçsız</option>
+      <option value="1500">≤ €1.500 / dönem</option>
+    </select>
+    <select id="fLang">
+      <option value="">Tüm diller</option>
+      <option value="eng">Sadece İngilizce</option>
+    </select>
+    <select id="fStatus"><option value="">Tüm durumlar</option></select>
+    <label style="font-size:13px"><input type="checkbox" id="hidePassed"> Geçenleri gizle</label>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>
+          <th data-sort="uni">Üniversite / Program</th>
+          <th data-sort="kademe">Kademe</th>
+          <th data-sort="deadline">Deadline (non-EU)</th>
+          <th>Başvuru yolu</th>
+          <th data-sort="ucretSayi">Harç</th>
+          <th>Şartlar &amp; prosedür</th>
+          <th data-sort="score">İş skoru</th>
+          <th data-sort="status">Durum</th>
+          <th>Notlarım</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <section class="grid" style="margin-top:20px">
+    <div class="card checklist">
+      <h2>Belge kontrol listesi</h2>
+      <div id="checklist"></div>
+    </div>
+    <div class="card info">
+      <h2>Mezuniyet sonrası iş için bilmen gerekenler</h2>
+      <p><b>18 ay iş arama izni:</b> Alman üniversitesinden mezun olan yabancılar nitelikli iş aramak için 18 aya kadar oturum izni alabiliyor; bu sürede her türlü işte çalışmak serbest, süre uzatılamıyor.</p>
+      <p><b>AB Mavi Kart (2026):</b> genel eşik €50.700/yıl; IT gibi açık meslekler ve son 3 yıl içinde mezun olanlar için düşük eşik €45.934,20/yıl. Eşikler her yıl güncellenir.</p>
+      <p><b>Pazar durumu:</b> Bitkom'un 2026 araştırmasına göre Almanya'da hâlâ ~79.000 IT uzmanı açığı var, ancak açık pozisyon sayısı 2023'ten beri neredeyse yarıya indi. Yeni mezunlar için piyasa daha seçici; AI ve siber güvenlik uzmanlıkları talepte.</p>
+      <p><b>Junior AI mühendisi maaşı:</b> Almanya genelinde yaklaşık €55–75k brüt; Münih'te junior ML için €62–78k aralığı raporlanıyor.</p>
+      <p class="sub" style="font-size:12px">İş skorları şehir bazlı değerlendirmedir (1–5); <code>data.js</code> içindeki <code>CITIES</code> bölümünden kendi görüşüne göre değiştirebilirsin.</p>
+    </div>
+  </section>
+
+  <footer>
+    Durum, not ve kontrol listesi işaretlerin sadece bu tarayıcıda saklanır — farklı cihazda kullanmak için "Yedeği indir / yükle" kullan.
+    Program eklemek veya tarih güncellemek için repodaki <code>data.js</code> dosyasını düzenle.
+  </footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  const STATUSES = ["Araştırılıyor","Hazırlanıyor","Gönderildi","Mülakat/Sınav","Kabul","Ret","Vazgeçildi"];
+  const KEY = "almanya-master-takip-v1";
+  const store = (()=>{ try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; } })();
+  store.status = store.status || {}; store.notes = store.notes || {}; store.check = store.check || {};
+  store.weights = store.weights || null;
+  const save = ()=>{ try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e){} };
+
+  const today = new Date(); today.setHours(0,0,0,0);
+  const daysUntil = d => Math.round((new Date(d+"T00:00:00") - today)/86400000);
+  const fmt = d => new Date(d+"T00:00:00").toLocaleDateString("tr-TR",{day:"numeric",month:"short",year:"numeric"});
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const slug = s => s.toLowerCase().replace(/ö/g,"o").replace(/ü/g,"u").replace(/ı/g,"i").replace(/ş/g,"s").replace(/ç/g,"c").replace(/ğ/g,"g").replace(/[^a-z]/g,"");
+
+  // weights
+  const weights = store.weights || {hub:3,maas:3,ingilizce:2,arastirma:2};
+  document.querySelectorAll("[data-w]").forEach(r=>{
+    r.value = weights[r.dataset.w]; r.nextElementSibling.textContent = r.value;
+    r.addEventListener("input",()=>{ weights[r.dataset.w]=+r.value; r.nextElementSibling.textContent=r.value; store.weights=weights; save(); render(); });
+  });
+  const score = city => {
+    const c = CITIES[city]; if(!c) return 0;
+    const tot = Object.values(weights).reduce((a,b)=>a+b,0) || 1;
+    return (c.hub*weights.hub + c.maas*weights.maas + c.ingilizce*weights.ingilizce + c.arastirma*weights.arastirma)/tot;
+  };
+
+  // filters
+  const fCity = document.getElementById("fCity");
+  [...new Set(PROGRAMS.map(p=>p.sehir))].sort().forEach(c=>fCity.insertAdjacentHTML("beforeend",`<option>${esc(c)}</option>`));
+  const fStatus = document.getElementById("fStatus");
+  STATUSES.forEach(s=>fStatus.insertAdjacentHTML("beforeend",`<option>${s}</option>`));
+  ["q","fCity","fFee","fLang","fStatus","hidePassed"].forEach(id=>document.getElementById(id).addEventListener("input",render));
+
+  let sortKey="deadline", sortDir=1;
+  document.querySelectorAll("th[data-sort]").forEach(th=>th.addEventListener("click",()=>{
+    const k=th.dataset.sort; sortDir = (sortKey===k) ? -sortDir : (k==="score"?-1:1); sortKey=k; render();
+  }));
+
+  function render(){
+    const q = document.getElementById("q").value.toLowerCase();
+    const city=fCity.value, fee=document.getElementById("fFee").value, lang=document.getElementById("fLang").value,
+          st=fStatus.value, hide=document.getElementById("hidePassed").checked;
+    let rows = PROGRAMS.map(p=>({...p, score:score(p.sehir), status:store.status[p.id]||"Araştırılıyor"}))
+      .filter(p=>!q || (p.uni+p.program+p.sehir).toLowerCase().includes(q))
+      .filter(p=>!city || p.sehir===city)
+      .filter(p=>fee==="" || p.ucretSayi <= +fee)
+      .filter(p=>!lang || p.dil==="İngilizce")
+      .filter(p=>!st || p.status===st)
+      .filter(p=>!hide || daysUntil(p.deadline)>=0);
+    rows.sort((a,b)=>{ const x=a[sortKey], y=b[sortKey]; return (x>y?1:x<y?-1:0)*sortDir; });
+
+    document.getElementById("tbody").innerHTML = rows.map(p=>{
+      const d = daysUntil(p.deadline), c = CITIES[p.sehir]||{};
+      const cls = d<0?"passed":d<=30?"urgent":d<=90?"soon":"";
+      const early = p.erken ? `<div style="margin-top:4px"><span class="chip ${daysUntil(p.erken)>=0&&daysUntil(p.erken)<=30?'warn':''}">Erken: ${fmt(p.erken)}</span><div class="prog">${esc(p.erkenNot||"")}</div></div>` : "";
+      return `<tr>
+        <td><div class="uni">${esc(p.uni)}</div><div class="prog">${esc(p.program)}</div>
+            <span class="chip">${esc(p.sehir)}</span><span class="chip">${esc(p.dil)}</span>
+            <div><a href="${esc(p.link)}" target="_blank" rel="noopener">Resmi sayfa ↗</a></div></td>
+        <td><span class="chip ${p.kademe}">${p.kademe==="A"?"A · en üst":"B · çok güçlü"}</span></td>
+        <td><div class="dl ${cls}">${fmt(p.deadline)}</div>
+            <div class="prog">${d<0?"Geçti":d+" gün kaldı"}${p.acilis?" · açılış "+fmt(p.acilis):""}</div>
+            ${early}${p.dogrula?'<span class="chip warn">Tarihi doğrula</span>':''}</td>
+        <td>${esc(p.yol)}</td>
+        <td>${esc(p.ucret)}</td>
+        <td style="max-width:300px">${esc(p.sartlar)}</td>
+        <td><div class="score"><div class="bar"><i style="width:${(p.score/5*100).toFixed(0)}%"></i></div><b class="mono">${p.score.toFixed(1)}</b></div>
+            <div class="subscores">Sek ${c.hub} · Maaş ${c.maas} · İng ${c.ingilizce} · Arş ${c.arastirma}</div>
+            <details><summary>Junior ${esc(c.junior)} · detay</summary><p><b>İşverenler:</b> ${esc(c.isverenler)}</p><p>${esc(c.not)}</p></details></td>
+        <td><select class="status st-${slug(p.status)}" data-id="${p.id}">${STATUSES.map(s=>`<option ${s===p.status?"selected":""}>${s}</option>`).join("")}</select></td>
+        <td><textarea data-note="${p.id}" placeholder="Hoca, belge, şifre ipucu…">${esc(store.notes[p.id]||"")}</textarea></td>
+      </tr>`;
+    }).join("") || `<tr><td colspan="9" class="prog">Filtreye uyan program yok.</td></tr>`;
+
+    document.querySelectorAll("select.status").forEach(s=>s.addEventListener("change",()=>{ store.status[s.dataset.id]=s.value; save(); render(); }));
+    document.querySelectorAll("textarea[data-note]").forEach(t=>t.addEventListener("input",()=>{ store.notes[t.dataset.note]=t.value; save(); }));
+    renderTimeline();
+  }
+
+  function renderTimeline(){
+    const ev=[];
+    PROGRAMS.forEach(p=>{
+      if((store.status[p.id]||"")==="Vazgeçildi") return;
+      ev.push({d:p.deadline, t:`${p.uni.replace(/ \(.*\)/,"")} — ${p.program.replace("M.Sc. ","")}`});
+      if(p.erken) ev.push({d:p.erken, t:`${p.uni} — erken deadline`});
+      if(p.acilis && daysUntil(p.acilis)>=0) ev.push({d:p.acilis, t:`${p.uni.replace(/ \(.*\)/,"")} — başvuru açılıyor`, open:true});
+    });
+    const seen = new Set();
+    const up = ev.filter(e=>daysUntil(e.d)>=0)
+      .filter(e=>{ const k=e.d+"|"+e.t; if(seen.has(k)) return false; seen.add(k); return true; })
+      .sort((a,b)=>a.d<b.d?-1:1);
+    document.getElementById("timeline").innerHTML = up.map(e=>{
+      const n=daysUntil(e.d), c=n<=30?"urgent":n<=90?"soon":"later";
+      return `<li><span class="days ${c}">${n} gün</span><span>${fmt(e.d)} · ${esc(e.t)}${e.open?" ":""}</span></li>`;
+    }).join("");
+    const next = up.find(e=>!e.open);
+    document.getElementById("nextDays").textContent = next ? daysUntil(next.d)+" gün" : "—";
+    document.getElementById("nextLabel").textContent = next ? `${fmt(next.d)} · ${next.t}` : "";
+  }
+
+  // checklist
+  document.getElementById("checklist").innerHTML = CHECKLIST.map((c,i)=>
+    `<label><input type="checkbox" data-c="${i}" ${store.check[i]?"checked":""}> <span>${esc(c)}</span></label>`).join("");
+  document.querySelectorAll("[data-c]").forEach(cb=>cb.addEventListener("change",()=>{ store.check[cb.dataset.c]=cb.checked; save(); }));
+
+  // export / import
+  document.getElementById("exportBtn").onclick = ()=>{
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(new Blob([JSON.stringify(store,null,2)],{type:"application/json"}));
+    a.download="master-takip-yedek.json"; a.click();
+  };
+  document.getElementById("importBtn").onclick = ()=>document.getElementById("importFile").click();
+  document.getElementById("importFile").onchange = e=>{
+    const f=e.target.files[0]; if(!f) return;
+    f.text().then(t=>{ try{ Object.assign(store, JSON.parse(t)); save(); location.reload(); }catch(err){ alert("Dosya okunamadı."); } });
+  };
+
+  // theme
+  const root=document.documentElement;
+  try{ if(localStorage.getItem(KEY+"-theme")) root.dataset.theme=localStorage.getItem(KEY+"-theme"); }catch(e){}
+  document.getElementById("themeBtn").onclick=()=>{
+    const dark = root.dataset.theme ? root.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark?"light":"dark";
+    try{ localStorage.setItem(KEY+"-theme", root.dataset.theme); }catch(e){}
+  };
+
+  render();
+})();
+</script>
+</body>
+</html>
